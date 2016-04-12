@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicTacToe</title>
+
+</head>
+<body>
+<style>
+    .ticTacToeBtn{
+        height:20px;
+        width: 20px;
+        text-align: center;
+        padding: 2px;
+
+    }
+
+</style>
+    <script src="TictacToe.js"></script>
+    <script>
+        var isCurrentCross = false;
+        var xCoordinates = [];
+        var oCoordinates = [];
+
+        function handleClick(e){
+            var winOccured = false;
+            console.log(e.target);
+          //  e.target.text = "O";
+            e.target.disabled = true;
+            if(!isCurrentCross)
+            {
+                e.target.innerHTML = "O";
+                oCoordinates.push(e.target.getAttribute("data-col"));
+                if(calculateWin(oCoordinates)){
+                    var element = document.getElementById("ticTacDiv");
+                    element.disabled = true;
+                    var resultSpan = document.getElementById("resultSpan");
+                    resultSpan.innerHTML = "O wins";
+                    winOccured = true;
+                }
+            }
+            else {
+                e.target.innerHTML = "X";
+                xCoordinates.push(e.target.getAttribute("data-col"));
+                if(calculateWin(xCoordinates)){
+                    var element = document.getElementById("ticTacDiv");
+                    element.disabled = true;
+                    var resultSpan = document.getElementById("resultSpan");
+                    resultSpan.innerHTML = "X wins";
+                    winOccured = true;
+                }
+            }
+
+            if(winOccured)
+            {
+                document.getElementById("ticTacDiv").getElementsByTagName("*").disabled = true;
+            }
+
+            isCurrentCross = !isCurrentCross;
+
+
+            console.log("item clicked");
+        }
+    </script>
+    <div id="ticTacDiv">
+    <tr>
+        <button id="1" data-col="2" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="2" data-col="7" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="3" data-col="6" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+    </tr>
+    <br>
+    <tr>
+        <button id="4" data-col="9" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="5" data-col="5" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="6" data-col="6" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+    </tr>
+    <br>
+    <tr>
+        <button id="7" data-col="4" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="8" data-col="3" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+        <button id="9" data-col="8" onclick="handleClick(event)" class="ticTacToeBtn"></button>
+    </tr>
+    </div>
+    <span id="resultSpan"></span>
+</body>
+</html>
